@@ -38,17 +38,24 @@ namespace szgya_employee
             }
 
             // 15
+            //sajnos az ismétlődő keresztnevek miatt ennek a megoldásnak nincs sok értelme
+            //using StreamWriter sw = new StreamWriter("../../../12mil.txt");
+            //foreach (var item in Above12MilHUFYearly(employees))
+            //{
+            //    sw.WriteLine($"{item.Key};{item.Value}");
+            //}
             using StreamWriter sw = new StreamWriter("../../../12mil.txt");
-            foreach (var item in Above12MilHUFYearly(employees))
+            foreach (var employee in employees.Where(e => e.SalaryYearlyHUF > 12000000))
             {
-                sw.WriteLine($"{item.Key};{item.Value}");
+                sw.WriteLine($"{employee.Name};{employee.SalaryYearlyHUF}");
             }
+
 
             Console.WriteLine($"16.feladat: átlag fizetés: {employees.Average(e => e.Salary)}");
 
             Console.WriteLine($"17.feladat: dev átlagfizetés: {employees.Where(e => e.Position == "Developer").Average(e => e.Salary)} EUR");
 
-            Console.WriteLine($"18.feladat: \n\tférfi átlagfizetés:{employees.Where(e => e.Gender).Average(e => e.Salary)}");
+            Console.WriteLine($"18.feladat: \n\tférfi átlagfizetés:{employees.Where(e => e.Gender).Average(e => e.Salary)}\n\tnői átlagfizetés:{employees.Where(e => !e.Gender).Average(e => e.Salary)}");
 
         }
     }
